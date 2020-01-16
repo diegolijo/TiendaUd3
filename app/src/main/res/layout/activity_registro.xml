@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jito.tiendaud3.RegistroActivity">
+
+    <TextView
+        android:id="@+id/textView_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="16dp"
+        android:autoText="false"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_contraseña2" />
+
+    <Button
+        android:id="@+id/btn_aceptarRegitro"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:onClick="ClickRexistro"
+        android:text="@string/registro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox_Admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/administrador"
+        app:layout_constraintStart_toStartOf="@+id/editText_contraseña"
+        app:layout_constraintTop_toBottomOf="@+id/editText_contraseña2" />
+
+    <EditText
+        android:id="@+id/editText_NomeUsuario"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@android:drawable/bottom_bar"
+        android:ems="10"
+        android:hint="@string/nomeUsusario"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/editText_email"
+        app:layout_constraintStart_toStartOf="@+id/editText_email"
+        app:layout_constraintTop_toBottomOf="@+id/editText_email" />
+
+    <EditText
+        android:id="@+id/editText_contraseña"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@android:drawable/bottom_bar"
+        android:ems="10"
+        android:hint="@string/contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/editText_NomeUsuario"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/editText_NomeUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/editText_NomeUsuario" />
+
+    <EditText
+        android:id="@+id/editText_contraseña2"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@android:drawable/bottom_bar"
+        android:ems="10"
+        android:hint="@string/RepetirContraseña"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/editText_NomeUsuario"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editText_contraseña"
+        app:layout_constraintTop_toBottomOf="@+id/editText_contraseña" />
+
+    <EditText
+        android:id="@+id/editText_nombre"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@android:drawable/bottom_bar"
+        android:ems="10"
+        android:hint="@string/nombre"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_apellidos"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@android:drawable/bottom_bar"
+        android:ems="10"
+        android:hint="@string/apellidos"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/editText_nombre"
+        app:layout_constraintStart_toStartOf="@+id/editText_nombre"
+        app:layout_constraintTop_toBottomOf="@+id/editText_nombre" />
+
+    <EditText
+        android:id="@+id/editText_email"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@android:drawable/bottom_bar"
+        android:ems="10"
+        android:hint="@string/e_mail"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/editText_apellidos"
+        app:layout_constraintStart_toStartOf="@+id/editText_apellidos"
+        app:layout_constraintTop_toBottomOf="@+id/editText_apellidos" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
