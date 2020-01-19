@@ -1,14 +1,20 @@
 package com.jito.tiendaud3;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.jito.tiendaud3.dummy.datos.BaseDatos;
+import com.jito.tiendaud3.dummy.datos.Pedido;
 
 import static android.app.PendingIntent.getActivity;
 
@@ -18,41 +24,99 @@ public class Direccion_Activity extends AppCompatActivity {
     String categoria;
     String producto;
     int cantidade;
-
+    TextView TVetiqueta;
+    EditText ETrua;
+    EditText ETcidade;
+    EditText ETcp;
+    String rua;
+    String cidade;
+    String cp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_direccion_);
-        getSupportActionBar().setTitle(R.string.direccion);
+        try {
+            getSupportActionBar().setTitle(R.string.direccion);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Toolbar Toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(Toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle(R.string.direccion);
+
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getString("usuario");
         categoria = extras.getString("categoria");
         producto = extras.getString("producto");
         cantidade = Integer.parseInt(extras.getString("cantidade"));
+
+        TVetiqueta = findViewById(R.id.textView_info2);
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
     }
 
 
     public void finalizar(View view) {
 
-        EditText ETrua = findViewById(R.id.editText_direccion);
-        EditText ETcidade = findViewById(R.id.editText_cidade);
-        EditText ETcp = findViewById(R.id.editText_cp);
 
-        String rua = ETrua.getText().toString();
-        String cidade = ETcidade.getText().toString();
-        int cp = Integer.parseInt(ETcp.getText().toString());
+        TVetiqueta.setText("");
+        ETrua = findViewById(R.id.editText_direccion);
+        ETcidade = findViewById(R.id.editText_cidade);
+        ETcp = findViewById(R.id.editText_cp);
+        rua = ETrua.getText().toString();
+        cidade = ETcidade.getText().toString();
+        cp = ETcp.getText().toString();
+
+        if (rua.equals("") || cidade.equals("") || cp.equals("")) {
+            TVetiqueta.setText(R.string.camposVacios);
+        } else {
 
 
-        //abrir base de datos
+            //dialogo -> actualizar el campo estado en BD
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Aceptar ou rexeitar o pedido");
+            builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    guardarDatos();
+
+                }
+            });
+
+            builder.setNegativeButton("Rexeitar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+
+                }
+            });
+
+            AlertDialog dialogo = builder.create();
+            dialogo.show();
+
+
+        }
+    }
+
+
+    public void guardarDatos() {
         BaseDatos db = Room.databaseBuilder(getApplicationContext(),
                 BaseDatos.class, "TiendaUd3").allowMainThreadQueries().build();
 
         Pedido pedido = new Pedido();
         pedido.categoria = categoria;
         pedido.cidade = cidade;
-        pedido.cp = cp;
+        pedido.cp = Integer.parseInt(cp);
         pedido.cantidade = cantidade;
         pedido.usuario = usuario;
         pedido.producto = producto;
@@ -60,8 +124,13 @@ public class Direccion_Activity extends AppCompatActivity {
 
         db.Dao().insertPedido(pedido);
 
+
+        Toast toastregistrado = Toast.makeText(this, R.string.pedidoconfirmado, Toast.LENGTH_LONG);
+        toastregistrado.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toastregistrado.show();
+
+
         finish();
+
     }
-
-
 }

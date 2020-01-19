@@ -9,7 +9,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
+
+import com.jito.tiendaud3.dummy.datos.BaseDatos;
+import com.jito.tiendaud3.dummy.datos.Usuario;
 
 public class RegistroActivity extends AppCompatActivity {
 
@@ -17,7 +21,19 @@ public class RegistroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-        getSupportActionBar().setTitle(R.string.registro);
+
+        Toolbar Toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(Toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle( R.string.registro);
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
     }
 
 
@@ -101,7 +117,7 @@ public class RegistroActivity extends AppCompatActivity {
                     toastregistrado.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     toastregistrado.show();
 
-                    // Guardar foto con nombre de usuario
+                    finish();
 
 
                 }

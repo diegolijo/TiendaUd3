@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "ac57936c5b88c0c2f4a83ec67fe77cbc",
+    "identityHash": "ff658f4bf40b61b9928135a98f08172e",
     "entities": [
       {
         "tableName": "Usuario",
@@ -56,7 +56,7 @@
       },
       {
         "tableName": "Pedido",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`numero` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idusuario` TEXT, `categoria` TEXT, `producto` TEXT, `cantidade` INTEGER NOT NULL, `rua` TEXT, `cidade` TEXT, `cp` INTEGER NOT NULL, `aceptado` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`numero` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `usuario` TEXT, `categoria` TEXT, `producto` TEXT, `cantidade` INTEGER NOT NULL, `rua` TEXT, `cidade` TEXT, `cp` INTEGER NOT NULL, `estado` TEXT)",
         "fields": [
           {
             "fieldPath": "numero",
@@ -66,7 +66,7 @@
           },
           {
             "fieldPath": "usuario",
-            "columnName": "idusuario",
+            "columnName": "usuario",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -107,9 +107,9 @@
             "notNull": true
           },
           {
-            "fieldPath": "aceptado",
-            "columnName": "aceptado",
-            "affinity": "INTEGER",
+            "fieldPath": "estado",
+            "columnName": "estado",
+            "affinity": "TEXT",
             "notNull": false
           }
         ],
@@ -126,7 +126,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ac57936c5b88c0c2f4a83ec67fe77cbc')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ff658f4bf40b61b9928135a98f08172e')"
     ]
   }
 }

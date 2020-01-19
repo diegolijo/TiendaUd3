@@ -1,4 +1,4 @@
-package com.jito.tiendaud3;
+package com.jito.tiendaud3.dummy.datos;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -25,8 +25,32 @@ public interface DeviceDao {
     @Query("SELECT * FROM pedido")
     List<Pedido> selectPedido();
 
-    @Query("SELECT * FROM pedido WHERE aceptado = :aceptado")
-    Usuario selectAceptados(String aceptado);
+    @Query("SELECT * FROM pedido WHERE estado = :estado")
+    List<Pedido> selectAceptados(String estado);
+
+    @Query("SELECT * FROM pedido WHERE usuario = :usuario")
+    List<Pedido> selectPedidoUsuario(String usuario);
+
+
+    @Query("SELECT * FROM pedido WHERE numero = :numero")
+    Pedido selectPedidoNumero(int numero);
+
+
+
+    @Query("SELECT * FROM pedido WHERE usuario = :usuario AND estado = :estado")
+    List<Pedido> selectPedidosEstado(String usuario, String estado);
+
+
+
+
+
+    @Query("UPDATE pedido SET estado = :estado WHERE numero = :numero")
+    void updatePedido(int numero, String estado);
+
+
+
+
+
 
 
 
@@ -42,6 +66,14 @@ public interface DeviceDao {
 
     @Insert
     void insertUsersAndFriends(Usuario user, List<Usuario> friends);
+
+
+
+
+
+
+
+
 
 
     @Delete

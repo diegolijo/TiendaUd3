@@ -16,14 +16,13 @@ import com.jito.tiendaud3.dummy.datos.Usuario;
 
 import java.text.MessageFormat;
 
-public class MenuActivity extends AppCompatActivity {
-
-    private String usuario;
+public class MenuActivityAdmin extends AppCompatActivity {
+    String usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_menu_admin);
 
         Toolbar Toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(Toolbar);
@@ -36,26 +35,27 @@ public class MenuActivity extends AppCompatActivity {
 
         // abrir bd
         BaseDatos db = Room.databaseBuilder(getApplicationContext(),
-                BaseDatos.class, "TiendaUd3").allowMainThreadQueries().build();
-        //guardamos usuario
+                BaseDatos.class, "TiendaUd3").allowMainThreadQueries().build(); //
+        //buscar usuario
         Usuario usuarioBD = db.Dao().selectUsuario(usuario);
 
-        TextView tvNombre = findViewById(R.id.TextView_nombre);
-        tvNombre.setText(MessageFormat.format("Benvido {0}", usuarioBD.usuario));
+
+        TextView TV_nombre = findViewById(R.id.TextView_nombre);
+        TV_nombre.setText(MessageFormat.format("Benvido {0}", usuarioBD.nombre+" "+usuarioBD.apellidos));
 
         androidx.appcompat.widget.AppCompatImageView foto = findViewById(R.id.view_foto);
-        foto.setBackgroundResource(R.drawable.foto_user);
+        foto.setBackgroundResource(R.drawable.foto_admin);
 
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menuuser, menu);
+        getMenuInflater().inflate(R.menu.menuadmin, menu);
         return true;
     }
+
 
 
     @Override
@@ -66,21 +66,21 @@ public class MenuActivity extends AppCompatActivity {
 
         //int id = item.getItemId();
         switch (item.getItemId()) {
-            case R.id.menu_facer_pedido:
-
-                hacerPedido();
+            case R.id.menu_pedido_tamite:
+                clickverPedidoMenu();
                 return true;
-            case R.id.menu_ver_pedidos:
-                verPedidos();
+            case R.id.menu_ver_aceptados:
+                clickveracAptadossMenu();
                 return true;
-            case R.id.menu_ver_compras:
-                verCompras();
+            case R.id.menu_ver_rechazados:
+                clickverRechazadosMenu();
                 return true;
-            case R.id.menu_alir:
+            case R.id.menu_salir:
                 finish();
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -89,53 +89,52 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    public void hacerPedidoBoton(View view) {
-        hacerPedido();
-    }
-
-    public void verPedidosBoton(View view) {
-        verPedidos();
-    }
-
-    public void verComprasBoton(View view) {
-        verCompras();
+    public void verPedidosTramite(View view) {
+        clickverPedidoMenu();
     }
 
 
-    private void hacerPedido() {
+    public void verPedidosAceptados(View view) {
 
-        // abrir bd
-        BaseDatos db = Room.databaseBuilder(getApplicationContext(),
-                BaseDatos.class, "TiendaUd3").allowMainThreadQueries().build(); //
-        Usuario usuarioBD = db.Dao().selectUsuario(usuario);
-
-        Intent intent = new Intent(this, PedidoActivity.class);
-        intent.putExtra("usuario", usuarioBD.usuario);
-        startActivity(intent);
+        clickveracAptadossMenu();
     }
 
-    private void verPedidos() {
-        Intent intent = new Intent(this, VerPedidosActivity.class);
-        intent.putExtra("usuario", usuario);
-        intent.putExtra("estado", "");
-        intent.putExtra("adminx", false);
-        intent.putExtra("titulo", "Pedidos realizados");
-        startActivity(intent);
-    }
-
-
-    private void verCompras() {
-        Intent intent = new Intent(this, VerPedidosActivity.class);
-        intent.putExtra("usuario", usuario);
-        intent.putExtra("estado", "aceptado");
-        intent.putExtra("adminx", false);
-        intent.putExtra("titulo", "Compras");
-        startActivity(intent);
+    public void verPedidosRechazados(View view) {
+        clickverRechazadosMenu();
     }
 
     public void salir(View view) {
         finish();
     }
 
-}
 
+
+
+    private void clickverRechazadosMenu() {
+        Intent intent = new Intent(this, VerPedidosActivity.class);
+        intent.putExtra("usuario", usuario);
+        intent.putExtra("estado", "rechazado");
+        intent.putExtra("admin", true);
+        intent.putExtra("titulo", "Pedidos rexeitados");
+        startActivity(intent);
+    }
+
+    private void clickveracAptadossMenu() {
+        Intent intent = new Intent(this, VerPedidosActivity.class);
+        intent.putExtra("usuario", usuario);
+        intent.putExtra("estado", "aceptado");
+        intent.putExtra("admin", true);
+        intent.putExtra("titulo", "Pedidos aceptados");
+        startActivity(intent);
+    }
+
+    private void clickverPedidoMenu() {
+        Intent intent = new Intent(this, VerPedidosActivity.class);
+        intent.putExtra("admin", true);
+        intent.putExtra("usuario", usuario);
+        intent.putExtra("estado", "");
+        intent.putExtra("titulo", "Pedidos en tramite");
+        startActivity(intent);
+    }
+
+}

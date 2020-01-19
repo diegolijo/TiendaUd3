@@ -1,4 +1,4 @@
-package com.jito.tiendaud3;
+package com.jito.tiendaud3.dummy.datos;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -10,7 +10,7 @@ public class Pedido {
     @PrimaryKey(autoGenerate = true)
     public int numero = 0;
 
-    @ColumnInfo(name = "idusuario")
+    @ColumnInfo(name = "usuario")
     public String usuario;
 
     @ColumnInfo(name = "categoria")
@@ -31,6 +31,6 @@ public class Pedido {
     @ColumnInfo(name = "cp")
     public int cp;
 
-    @ColumnInfo(name = "aceptado")
-    public Boolean aceptado;
+    @ColumnInfo(name = "estado")
+    public String estado = "";
 }

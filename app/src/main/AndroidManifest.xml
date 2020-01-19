@@ -8,10 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MenuActivityUser"></activity>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"> -- De esta manera, se evita que la app use la clase ActionBar nativa para proporcionar la barra de app.
+
+        <activity android:name=".MenuActivityAdmin"></activity>
         <activity android:name=".RegistroActivity" />
-        <activity android:name=".VerComprasActivity" />
         <activity android:name=".VerPedidosActivity" />
         <activity android:name=".Direccion_Activity" />
         <activity android:name=".PedidoActivity" />
@@ -26,3 +26,7 @@
     </application>
 
 </manifest>
+
+
+<!--
+    android:theme="@style/AppTheme"   -->

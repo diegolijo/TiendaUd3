@@ -1,9 +1,14 @@
 package com.jito.tiendaud3;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,7 +26,12 @@ public class PedidoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido);
-        getSupportActionBar().setTitle(R.string.pedidos);
+
+        Toolbar Toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(Toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle(R.string.novoPedido);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getString("usuario");
@@ -55,18 +65,19 @@ public class PedidoActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
-
-
         });
     }
 
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
+    }
 
 
     public void siguiente(View view) {
-
         Spinner SP_categoria = findViewById(R.id.SP_categoria);
         Spinner SP_producto = findViewById(R.id.SP_productos);
         Spinner SP_cantidade = findViewById(R.id.SP_cantidade);
@@ -79,5 +90,6 @@ public class PedidoActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 
 }

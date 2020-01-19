@@ -1,4 +1,4 @@
-package com.jito.tiendaud3;
+package com.jito.tiendaud3.dummy.datos;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
