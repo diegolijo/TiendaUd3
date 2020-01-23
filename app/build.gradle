@@ -12,14 +12,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
 
-        defaultConfig {
+/*        defaultConfig {
             javaCompileOptions {
                 //exportar esquema de room, escribirá  en una 'schemas' subcarpeta del proyecto.
                 annotationProcessorOptions {
                     arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
                 }
             }
-        }
+        }           */
     }
 
     buildTypes {
